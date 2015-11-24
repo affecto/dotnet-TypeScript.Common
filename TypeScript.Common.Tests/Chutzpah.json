@@ -1,0 +1,22 @@
+﻿{
+    "Framework": "jasmine",
+    "TestHarnessLocationMode": "TestFileAdjacent",
+    "TypeScriptCodeGenTarget": "ES5",
+    "RootReferencePathMode": "SettingsFileDirectory",
+
+    "Compile": {
+        "Mode": "External",
+        "Extensions": [ ".ts" ],
+        "ExtensionsWithNoOutput": [ ".d.ts" ]
+    },
+
+    "References": [
+        { "Path": "../TypeScript.Common/Scripts/affecto/", "Include": "*.ts" },
+        { "Path": "../TypeScript.Common/Scripts/affecto/", "Include": "*.js" },
+        { "Path": "Scripts/typings/jasmine/", "Include": "*.ts", "IsTestFrameworkFile": true }
+    ],
+
+    "Tests": [
+        { "Path": "Unit tests/Scripts/affecto", "Include": "*.ts" }
+    ]
+}

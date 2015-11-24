@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <description>$description$</description>
+    <projectUrl>https://github.com/affecto/dotnet-Patterns.Domain</projectUrl>
+    <tags>affecto typescript common compare convert converter validate validator date datetime number html escape</tags>
+    <releaseNotes>Moved to GitHub.</releaseNotes>
+  </metadata>
+  <files>
+    <file src="Scripts\affecto\**\*.ts" target="content\Scripts\affecto"/>
+  </files>
+</package>
