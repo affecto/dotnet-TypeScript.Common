@@ -26,7 +26,7 @@ before_test:
 
     # Run tests using Chutzpah and export results as JUnit format to chutzpah-results.xml
 
-    $ChutzpahCmd = "$($ChutzpahDir)\chutzpah.console.exe $($env:APPVEYOR_BUILD_FOLDER)\TypeScript.Common.Tests /junit .\chutzpah-results.xml"
+    $ChutzpahCmd = "$($ChutzpahDir)\chutzpah.console.exe $($env:APPVEYOR_BUILD_FOLDER)\TypeScript.Common.Tests /silent /failOnError /junit .\chutzpah-results.xml"
 
 
     Write-Host $ChutzpahCmd
@@ -70,9 +70,9 @@ before_test:
     }
 
 
-    if ($anyFailures -eq $TRUE)
+    #if ($anyFailures -eq $TRUE)
 
-    {
-        Write-Host "Failing build as there are broken tests"
-        $host.SetShouldExit(1)
-    }
+    #{
+        #Write-Host "Failing build as there are broken tests"
+        #$host.SetShouldExit(1)
+    #}
