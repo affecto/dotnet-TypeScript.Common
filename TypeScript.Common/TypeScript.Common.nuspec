@@ -7,9 +7,10 @@
     <description>$description$</description>
     <projectUrl>https://github.com/affecto/dotnet-Patterns.Domain</projectUrl>
     <tags>affecto typescript common compare convert converter validate validator date datetime number html escape</tags>
-    <releaseNotes>Moved to GitHub.</releaseNotes>
+    <releaseNotes>Removed web.config from the generated NuGet package.</releaseNotes>
   </metadata>
   <files>
     <file src="Scripts\affecto\**\*.ts" target="content\Scripts\affecto"/>
+    <file src="bin\**\*.dll" exclude="bin\**\*.dll" />
   </files>
 </package>
