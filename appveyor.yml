@@ -14,14 +14,14 @@ configuration: Release
 deploy:
 - provider: NuGet
   api_key:
-	secure: ySttUuKXaqz/qn7dZRtJJs7H8wTDgT8Wgi55QFGZjmVE2XL14T2puaPiBcNMZC1l
+    secure: ySttUuKXaqz/qn7dZRtJJs7H8wTDgT8Wgi55QFGZjmVE2XL14T2puaPiBcNMZC1l
   on:
-	APPVEYOR_REPO_TAG: true
+    APPVEYOR_REPO_TAG: true
 before_test:
 - ps: >-
-	# Run Chutzpah unit tests
+    # Run Chutzpah unit tests
 
-    	
+	
 	# Locate Chutzpah
 
 	$ChutzpahDir = Get-ChildItem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
@@ -48,7 +48,7 @@ before_test:
 	foreach ($testsuite in $testsuites.testsuites.testsuite)
 
 	{
-		#Write-Host "`r`n============================================================="
+		Write-Host "`r`n============================================================="
 		Write-Host "Test file: $($testsuite.name)"
 		foreach ($testcase in $testsuite.testcase)
 		{
