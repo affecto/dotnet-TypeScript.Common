@@ -21,62 +21,62 @@ before_test:
 - ps: >-
     # Run Chutzpah unit tests
 
-	
-	# Locate Chutzpah
+    
+    # Locate Chutzpah
 
-	$ChutzpahDir = Get-ChildItem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
-
-
-	# Run tests using Chutzpah and export results as JUnit format to chutzpah-results.xml
-
-	$ChutzpahCmd = "$($ChutzpahDir)\chutzpah.console.exe $($env:APPVEYOR_BUILD_FOLDER)\TypeScript.Common.Tests /silent /junit .\chutzpah-results.xml"
+    $ChutzpahDir = Get-ChildItem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
 
 
-	Write-Host $ChutzpahCmd
+    # Run tests using Chutzpah and export results as JUnit format to chutzpah-results.xml
 
-	Invoke-Expression $ChutzpahCmd
-
-
-	# Upload results to AppVeyor one by one
+    $ChutzpahCmd = "$($ChutzpahDir)\chutzpah.console.exe $($env:APPVEYOR_BUILD_FOLDER)\TypeScript.Common.Tests /silent /junit .\chutzpah-results.xml"
 
 
-	$testsuites = [xml](get-content .\chutzpah-results.xml)
+    Write-Host $ChutzpahCmd
 
-	$anyFailures = $FALSE
-
-
-	foreach ($testsuite in $testsuites.testsuites.testsuite)
-
-	{
-		Write-Host "`r`n============================================================="
-		Write-Host "Test file: $($testsuite.name)"
-		foreach ($testcase in $testsuite.testcase)
-		{
-			$failed = $testcase.failure
-			$time = $testsuite.time
-			if ($testcase.time)
-			{
-				$time = $testcase.time
-			}
-
-			if ($failed)
-			{
-				Write-Host "Failed - $($testcase.name) $($testcase.failure.message)" -foregroundcolor "red"
-				Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
-				$anyFailures = $TRUE
-			}
-			else
-			{
-				Write-Host "Passed - $($testcase.name)"
-				Add-AppveyorTest $testcase.name -Outcome Passed -FileName $testsuite.name -Duration $time
-			}
-		}
-	}
+    Invoke-Expression $ChutzpahCmd
 
 
-	if ($anyFailures -eq $TRUE)
+    # Upload results to AppVeyor one by one
 
-	{
-		Write-Host "Failing build as there are broken tests"
-		$host.SetShouldExit(1)
-	}
+
+    $testsuites = [xml](get-content .\chutzpah-results.xml)
+
+    $anyFailures = $FALSE
+
+
+    foreach ($testsuite in $testsuites.testsuites.testsuite)
+
+    {
+        Write-Host "`r`n============================================================="
+        Write-Host "Test file: $($testsuite.name)"
+        foreach ($testcase in $testsuite.testcase)
+        {
+            $failed = $testcase.failure
+            $time = $testsuite.time
+            if ($testcase.time)
+            {
+                $time = $testcase.time
+            }
+
+            if ($failed)
+            {
+                Write-Host "Failed - $($testcase.name) $($testcase.failure.message)" -foregroundcolor "red"
+                Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
+                $anyFailures = $TRUE
+            }
+            else
+            {
+                Write-Host "Passed - $($testcase.name)"
+                Add-AppveyorTest $testcase.name -Outcome Passed -FileName $testsuite.name -Duration $time
+            }
+        }
+    }
+
+
+    if ($anyFailures -eq $TRUE)
+
+    {
+        Write-Host "Failing build as there are broken tests"
+        $host.SetShouldExit(1)
+    }
