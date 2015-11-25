@@ -61,7 +61,8 @@ before_test:
 
             if ($failed)
             {
-                Write-Host "Failed - $($testcase.name) $($testcase.failure.message)" -foregroundcolor "red"
+                Write-Host "Failed - $($testcase.name) $($testcase.failure.message)" -foregroundcolor "Red"
+                Write-Host "$($testcase.failure.message)" -foregroundcolor "Yellow"
                 Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
                 $anyFailures = $TRUE
             }
