@@ -20,22 +20,32 @@ deploy:
 before_test:
 - ps: >-
     # Locate Chutzpah
-    $ChutzpahDir = get-childitem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
+
+    $ChutzpahDir = Get-ChildItem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
+
 
     # Run tests using Chutzpah and export results as JUnit format to chutzpah-results.xml
+
     $ChutzpahCmd = "$($ChutzpahDir)\chutzpah.console.exe $($env:APPVEYOR_BUILD_FOLDER)\TypeScript.Common.Tests /junit .\chutzpah-results.xml"
 
+
     Write-Host $ChutzpahCmd
+
     Invoke-Expression $ChutzpahCmd
+
 
     # Upload results to AppVeyor one by one
 
+
     $testsuites = [xml](get-content .\chutzpah-results.xml)
+
     $anyFailures = $FALSE
 
+
     foreach ($testsuite in $testsuites.testsuites.testsuite)
+
     {
-        write-host " $($testsuite.name)"
+        Write-Host " $($testsuite.name)"
         foreach ($testcase in $testsuite.testcase)
         {
             $failed = $testcase.failure
@@ -44,22 +54,25 @@ before_test:
             {
                 $time = $testcase.time
             }
+
             if ($failed)
             {
-                write-host "Failed $($testcase.name) $($testcase.failure.message)"
+                Write-Host "Failed $($testcase.name) $($testcase.failure.message)"
                 Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
                 $anyFailures = $TRUE
             }
             else
             {
-                write-host "Passed $($testcase.name)"
+                Write-Host "Passed $($testcase.name)"
                 Add-AppveyorTest $testcase.name -Outcome Passed -FileName $testsuite.name -Duration $time
             }
         }
     }
 
-    if ($anyFailures -eq $TRUE
+
+    if ($anyFailures -eq $TRUE)
+
     {
-        write-host "Failing build as there are broken tests"
+        Write-Host "Failing build as there are broken tests"
         $host.SetShouldExit(1)
     }
