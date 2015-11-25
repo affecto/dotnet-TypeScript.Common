@@ -155,9 +155,9 @@ describe("Date conversion", () =>
             expect(Affecto.DateConverter.toFinnishDateTime("2014-02-07")).toBe("7.2.2014 00:00:00");
         });
 
-        it("Date object in Finnish time zone is converted to date time with UTC time zone", () =>
+        it("Date object in UTC time zone is converted to date time with UTC time zone", () =>
         {
-            expect(Affecto.DateConverter.toFinnishDateTime(new Date(2014, 11, 17, 3, 10, 9))).toBe("17.12.2014 01:10:09");
+            expect(Affecto.DateConverter.toFinnishDateTime(new Date(Date.UTC(2014, 11, 17, 3, 10, 9)))).toBe("17.12.2014 03:10:09");
         });
 
         it("Unconvertable date is null date time", () =>
