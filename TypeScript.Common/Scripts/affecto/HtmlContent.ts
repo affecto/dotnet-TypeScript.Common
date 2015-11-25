@@ -9,6 +9,11 @@ module Affecto
             return "<br/>";
         }
 
+        public static escapeAndReplaceNewLines(content: string): string
+        {
+            return this.replaceNewLines(this.escape(content));
+        }
+
         public static escape(content: string): string
         {
             if (content != null)

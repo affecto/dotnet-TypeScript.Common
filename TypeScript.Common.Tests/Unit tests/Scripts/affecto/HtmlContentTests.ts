@@ -51,6 +51,14 @@ describe("HTML content", () =>
         });
     });
 
+    describe("escaped and with new line characters replaced with br elements", () =>
+    {
+        it("All new lines are replaced with br elements and other html elements are escaped", () =>
+        {
+            expect(Affecto.HtmlContent.escapeAndReplaceNewLines("<b>row 1</b>\n&row 2\r\nrow3")).toBe("&lt;b&gt;row 1&lt;/b&gt;<br/>&amp;row 2<br/>row3");
+        });
+    });
+
     describe("wrapped and sorted", () =>
     {
         it("Empty list wraps to an empty string", () =>
