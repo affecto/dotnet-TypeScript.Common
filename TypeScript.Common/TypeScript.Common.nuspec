@@ -5,9 +5,9 @@
     <version>$version$</version>
     <authors>$author$</authors>
     <description>$description$</description>
-    <projectUrl>https://github.com/affecto/dotnet-Patterns.Domain</projectUrl>
+    <projectUrl>https://github.com/affecto/dotnet-TypeScript.Common</projectUrl>
     <tags>affecto typescript common compare convert converter validate validator date datetime number html escape</tags>
-    <releaseNotes>Removed web.config from the generated NuGet package.</releaseNotes>
+    <releaseNotes>Added HTMLContent method escapeAndReplaceNewLines.</releaseNotes>
   </metadata>
   <files>
     <file src="Scripts\affecto\**\*.ts" target="content\Scripts\affecto"/>
