@@ -44,14 +44,11 @@ before_test:
 
 	$anyFailures = $FALSE
 
-	$newLine = [Environment]::NewLine
-
 
 	foreach ($testsuite in $testsuites.testsuites.testsuite)
 
 	{
-		Write-Host "$($newLine)"
-		Write-Host "============================================================="
+		Write-Host "`r`n============================================================="
 		Write-Host "Test file: $($testsuite.name)"
 		foreach ($testcase in $testsuite.testcase)
 		{
