@@ -11,6 +11,5 @@
   </metadata>
   <files>
     <file src="Scripts\affecto\**\*.ts" target="content\Scripts\affecto"/>
-    <file src="bin\**\*.dll" target="lib" exclude="bin\**\*.dll" />
   </files>
 </package>
