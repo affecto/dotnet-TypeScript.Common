@@ -59,6 +59,30 @@ describe("HTML content", () =>
         });
     });
 
+    describe("unescaped", () =>
+    {
+        it("escaped ambersands in a URL qyery string are unescaped", () =>
+        {
+            expect(Affecto.HtmlContent.unescape("http://machine.com/action?param1=value1&amp;param2=value2&amp;param3=value3")).toBe("http://machine.com/action?param1=value1&param2=value2&param3=value3");
+        });
+        it("escaped HTML tags are unescaped", () =>
+        {
+            expect(Affecto.HtmlContent.unescape("&lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;")).toBe("<div><div></div></div>");
+        });
+        it("Null content is null when unescaped", () =>
+        {
+            expect(Affecto.HtmlContent.unescape(null)).toBe(null);
+        });
+        it("Empty content is empty when unescaped", () =>
+        {
+            expect(Affecto.HtmlContent.unescape("")).toBe("");
+        });
+        it("Content with nothing to unespace is unchanged", () =>
+        {
+            expect(Affecto.HtmlContent.unescape("some text here")).toBe("some text here");
+        });
+    });
+
     describe("wrapped and sorted", () =>
     {
         it("Empty list wraps to an empty string", () =>
