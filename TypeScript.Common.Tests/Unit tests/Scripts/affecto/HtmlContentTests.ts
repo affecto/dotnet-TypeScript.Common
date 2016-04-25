@@ -69,10 +69,6 @@ describe("HTML content", () =>
         {
             expect(Affecto.HtmlContent.unescape("&lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;")).toBe("<div><div></div></div>");
         });
-        it("JavaScript is not returned when unescaping", () =>
-        {
-            expect(Affecto.HtmlContent.unescape("<script>alert('Executed!');</script>")).toBe(null);
-        });
         it("Null content is null when unescaped", () =>
         {
             expect(Affecto.HtmlContent.unescape(null)).toBe(null);

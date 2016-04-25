@@ -6,7 +6,7 @@
     <authors>$author$</authors>
     <description>$description$</description>
     <projectUrl>https://github.com/affecto/dotnet-TypeScript.Common</projectUrl>
-    <tags>affecto typescript common compare convert converter validate validator date datetime number html escape</tags>
+    <tags>affecto typescript common compare convert converter validate validator date datetime number html escape unescape decode encode</tags>
     <releaseNotes>Added HTMLContent method unescape.</releaseNotes>
   </metadata>
   <files>
