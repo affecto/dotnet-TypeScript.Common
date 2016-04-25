@@ -7,7 +7,7 @@
     <description>$description$</description>
     <projectUrl>https://github.com/affecto/dotnet-TypeScript.Common</projectUrl>
     <tags>affecto typescript common compare convert converter validate validator date datetime number html escape</tags>
-    <releaseNotes>Added HTMLContent method escapeAndReplaceNewLines.</releaseNotes>
+    <releaseNotes>Added HTMLContent method unescape.</releaseNotes>
   </metadata>
   <files>
     <file src="Scripts\affecto\**\*.ts" target="content\Scripts\affecto"/>
