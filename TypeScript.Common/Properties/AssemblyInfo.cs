@@ -8,4 +8,4 @@
 [assembly: AssemblyFileVersion("1.5.0.0")]
 
 // This version is used by NuGet:
-[assembly: AssemblyInformationalVersion("1.5.0-prerelease01")]
+[assembly: AssemblyInformationalVersion("1.5.0")]
