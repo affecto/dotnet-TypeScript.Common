@@ -165,4 +165,37 @@ describe("Date conversion", () =>
             expect(Affecto.DateConverter.toFinnishDateTime("no date")).toBeNull();
         });
     });
+
+    describe("to ISO8601 format string", () =>
+    {
+        it("Null date string is null date", () =>
+        {
+            expect(Affecto.DateConverter.toISO8601Date(null)).toBeNull();
+        });
+
+        it("Empty date string is empty date", () =>
+        {
+            expect(Affecto.DateConverter.toISO8601Date("")).toBe("");
+        });
+
+        it("Date and time are converted to date", () =>
+        {
+            expect(Affecto.DateConverter.toISO8601Date("2014-12-17T11:33:36.753")).toBe("2014-12-17");
+        });
+
+        it("Date alone is converted to date", () =>
+        {
+            expect(Affecto.DateConverter.toISO8601Date("2014-02-07")).toBe("2014-2-7");
+        });
+
+        it("Date object is converted to date", () =>
+        {
+            expect(Affecto.DateConverter.toISO8601Date(new Date(2014, 11, 17))).toBe("2014-12-17");
+        });
+
+        it("Unconvertable date is null date", () =>
+        {
+            expect(Affecto.DateConverter.toISO8601Date("no date")).toBeNull();
+        });
+    });
 });
