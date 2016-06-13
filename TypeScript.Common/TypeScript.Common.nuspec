@@ -7,7 +7,8 @@
     <description>$description$</description>
     <projectUrl>https://github.com/affecto/dotnet-TypeScript.Common</projectUrl>
     <tags>affecto typescript common compare convert converter validate validator date datetime number html escape unescape decode encode</tags>
-    <releaseNotes>Added DateConverter method toISO8601Date.</releaseNotes>
+    <releaseNotes>Refactored DateConverter to handle UTC dates by default. Added a method for converting date to ISO string without timezone.
+    </releaseNotes>
   </metadata>
   <files>
     <file src="Scripts\affecto\**\*.ts" target="content\Scripts\affecto"/>
