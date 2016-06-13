@@ -96,7 +96,8 @@ module Affecto
             var date: Date;
             if (input instanceof Date)
             {
-                date = input;
+                date = new Date(Date.UTC(input.getFullYear(), input.getMonth(), input.getDate(),
+                    input.getHours(), input.getMinutes(), input.getSeconds(), input.getMilliseconds()));
             }
             else if (typeof input === "string")
             {
