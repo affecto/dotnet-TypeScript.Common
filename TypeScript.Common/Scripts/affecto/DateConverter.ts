@@ -96,7 +96,7 @@ module Affecto
             var date: Date;
             if (input instanceof Date)
             {
-                date = new Date(input.toISOString());
+                date = input;
             }
             else if (typeof input === "string")
             {
