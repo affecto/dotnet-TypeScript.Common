@@ -48,8 +48,10 @@ module Affecto
             }
         }
 
-        // Returns string in format yyyy-MM-dd
-        public static toISO8601Date(date: any): string
+        /**
+         * Returns string in format yyyy-MM-dd (for example 2016-06-10)
+         */
+        public static toISO8601Date(date: Date | string): string
         {
             return this.doConversion(date, (dateObject: Date) =>
             {
@@ -57,7 +59,18 @@ module Affecto
             });
         }
 
-        public static toFinnishDate(date: any): string
+        /**
+         * Returns string in format yyyy-MM-ddThh:mm:ss without timezone (for example 2016-06-10T06:40:37)
+         */
+        public static toISO8601DateTime(date: Date | string): string
+        {
+            return this.doConversion(date, (dateObject: Date) =>
+            {
+                return this.getISO8601DateTime(dateObject);
+            });
+        }
+
+        public static toFinnishDate(date: Date | string): string
         {
             return this.doConversion(date, (dateObject: Date) =>
             {
@@ -65,7 +78,7 @@ module Affecto
             });
         }
 
-        public static toFinnishDateTime(dateTime: any): string
+        public static toFinnishDateTime(dateTime: Date | string): string
         {
             return this.doConversion(dateTime, (dateObject: Date) =>
             {
@@ -73,38 +86,58 @@ module Affecto
             });
         }
 
-        private static doConversion(input: string, conversionFunction: Function): string
+        private static doConversion(input: any, conversionFunction: (date: Date) => string): string
         {
-            if (input != null && input !== "")
+            if (input == null || input === "")
             {
-                var dateObject: any = new Date(input);
-                if (!isNaN(dateObject.getDate()))
-                {
-                    return conversionFunction(dateObject);
-                }
                 return null;
             }
-            return input;
+
+            var date: Date;
+            if (input instanceof Date)
+            {
+                date = new Date(input.toISOString());
+            }
+            else if (typeof input === "string")
+            {
+                date = new Date(input as string);
+            }
+            else
+            {
+                return null;
+            }
+
+            if (!isNaN(date.getDate()))
+            {
+                return conversionFunction(date);
+            }
+
+            return null;
         }
 
         private static getISO8601Date(date: Date): string
         {
-            return date.getFullYear() + '-' + this.getMonth(date) + '-' + date.getDate();
+            return date.getUTCFullYear() + "-" + this.leftPadWithZero(this.getMonth(date)) + "-" + this.leftPadWithZero(date.getUTCDate());
+        }
+
+        private static getISO8601DateTime(date: Date): string
+        {
+            return this.getISO8601Date(date) + "T" + this.getTime(date);
         }
 
         private static getFinnishDate(date: Date): string
         {
-            return date.getDate() + "." + this.getMonth(date) + "." + date.getFullYear();
+            return date.getUTCDate() + "." + this.getMonth(date) + "." + date.getUTCFullYear();
         }
 
         private static getMonth(date: Date): number
         {
-            return date.getMonth() + 1;
+            return date.getUTCMonth() + 1;
         }
 
         private static getTime(date: Date): string
         {
-            return this.leftPadWithZero(date.getUTCHours()) + ":" + this.leftPadWithZero(date.getMinutes()) + ":" + this.leftPadWithZero(date.getSeconds());
+            return this.leftPadWithZero(date.getUTCHours()) + ":" + this.leftPadWithZero(date.getUTCMinutes()) + ":" + this.leftPadWithZero(date.getUTCSeconds());
         }
 
         private static leftPadWithZero(value: number): string
